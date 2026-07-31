@@ -11,8 +11,8 @@ import { setSoundEnabled, soundEnabled } from "@/lib/fx";
 
 const LINKS = [
   { href: "/", label: "Accueil", icon: Home },
-  { href: "/defi", label: "Défi du jour", icon: Swords },
-  { href: "/progres", label: "Mes progrès", icon: Trophy },
+  { href: "/defi", label: "Série du jour", icon: Swords },
+  { href: "/progres", label: "Statistiques", icon: Trophy },
 ];
 
 export function Nav() {
@@ -47,7 +47,7 @@ export function Nav() {
     <>
       {/* Barre haute (toutes tailles) : logo + compteurs */}
       <header className="sticky top-0 z-40 bg-cream/95 shadow-[0_2px_12px_rgba(45,45,63,0.08)] backdrop-blur">
-        <div className="mx-auto flex h-16 w-full max-w-[1250px] items-center justify-between px-4 md:px-8">
+        <div className="mx-auto flex h-16 w-full max-w-[1600px] items-center justify-between px-4 md:px-8">
           <Link href="/" className="flex items-center gap-2.5">
             <LaureatLogo size={36} />
             <span className="font-display text-2xl font-bold tracking-tight">
@@ -77,7 +77,7 @@ export function Nav() {
               title="Points d'expérience"
             >
               <Star size={16} strokeWidth={2.5} />
-              {progress.xp} XP
+              {progress.xp} pts
             </span>
             <button
               onClick={() => setSoundEnabled(!sound)}

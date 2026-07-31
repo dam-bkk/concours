@@ -72,7 +72,7 @@ export function SubjectView({ subject }: { subject: Subject }) {
           </p>
         </div>
       ) : (
-        <div className="stagger mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="stagger mt-5 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
           {chapters.map((ch) => {
             const total = ch.exercises.length;
             const doneCount = ch.exercises.filter((e) => progress.exercises[e.id]?.correct).length;

@@ -115,7 +115,7 @@ export default function ControlePage() {
             pendant l&apos;épreuve. Note sur 20 et corrections à la fin, comme en classe.
           </p>
         </div>
-        <div className="stagger mt-4 grid gap-3 sm:grid-cols-2">
+        <div className="stagger mt-4 grid grid-cols-2 gap-3">
           <button
             onClick={() => start("tout")}
             className="hero-card bg-gradient-to-br from-[#3B3B55] to-[#2D2D3F] p-5 text-left"

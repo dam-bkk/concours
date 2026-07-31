@@ -1,56 +1,75 @@
 @import "tailwindcss";
 
+/*
+ * Lauréat — design system « institutionnel premium ».
+ * Sombre, dense, sobre. Public adulte en préparation de concours.
+ * Tous les couples texte/fond sont vérifiés AAA (≥ 7:1) — voir scripts de contrôle.
+ * Les NOMS de tokens sont conservés depuis le moteur d'origine ; seules les
+ * valeurs changent, ce qui refond l'app entière sans toucher aux composants.
+ */
+
 @theme {
-  /* Fond & encre — palette "Todo Math" (cf. PIKKO_INSPIRATION) */
-  --color-cream: #fff9ee;
-  --color-cream-deep: #fff4dc;
-  --color-card: #fffcf0;
-  --color-ink: #2d2d3f;
-  --color-muted: #62627a;
-  --color-line: #f0e6d2;
+  /* Surfaces : profondeur par empilement */
+  --color-cream: #0d0f14; /* fond de page */
+  --color-cream-deep: #08090d;
+  --color-card: #14171f; /* panneaux */
+  --color-raised: #1b1f29;
+  --color-line: #262b38;
+  --color-line-strong: #384156;
 
-  /* Accent décoratif (grands titres / formes uniquement, pas de petit texte blanc dessus) */
-  --color-zest: #e8492f;
-  --color-zest-soft: #ffe9e0;
+  /* Texte (AAA sur toutes les surfaces) */
+  --color-ink: #f3f5fa; /* 17,6:1 */
+  --color-muted: #a9b2c7; /*  9,0:1 */
 
-  /* Domaines : tint = fond, strong = texte (vérifiés WCAG AA) */
-  --color-nombres-tint: #ffe3e2;
-  --color-nombres-strong: #b32b44;
-  --color-geometrie-tint: #dcedff;
-  --color-geometrie-strong: #1d5fa8;
-  --color-grandeurs-tint: #d7f4e8;
-  --color-grandeurs-strong: #0f6b52;
-  --color-donnees-tint: #e9e3ff;
-  --color-donnees-strong: #5a3ec8;
+  /* Accent principal : bleu institutionnel */
+  --color-zest: #5aa9ff;
+  --color-zest-soft: #0f2039;
 
-  /* XP / série */
-  --color-sun: #ffd166;
-  --color-sun-tint: #fff0c2;
-  --color-sun-strong: #7a5800;
+  /* Signalétique */
+  --color-sun: #ffb020;
+  --color-sun-tint: #2a1f06;
+  --color-sun-strong: #ffb020; /* 10,5:1 */
 
-  /* Feedback */
-  --color-ok-tint: #d7f4e8;
-  --color-ok-strong: #0f6b52;
-  --color-ko-tint: #ffe3e2;
-  --color-ko-strong: #b32b44;
+  --color-ok-tint: #0d2a1c;
+  --color-ok-strong: #5fe0a0; /* 10,9:1 */
+  --color-ko-tint: #2c1414;
+  --color-ko-strong: #ff9a9a; /*  8,1:1 */
+
+  /* Familles thématiques (héritées du moteur) */
+  --color-nombres-tint: #2c1414;
+  --color-nombres-strong: #ff9a9a;
+  --color-geometrie-tint: #0e1e33;
+  --color-geometrie-strong: #4dd4ff;
+  --color-grandeurs-tint: #0d2a1c;
+  --color-grandeurs-strong: #7dd3a8;
+  --color-donnees-tint: #1d1832;
+  --color-donnees-strong: #c4a2ff;
 
   --font-display: var(--font-baloo);
   --font-body: var(--font-nunito);
 
-  --radius-blob: 1.75rem;
+  --radius-blob: 1rem;
 
-  --shadow-pop: 0 6px 0 0 rgba(42, 36, 64, 0.12);
-  --shadow-pop-sm: 0 3px 0 0 rgba(42, 36, 64, 0.12);
+  --shadow-pop: 0 1px 0 0 rgba(255, 255, 255, 0.04) inset,
+    0 8px 24px -12px rgba(0, 0, 0, 0.9);
+  --shadow-pop-sm: 0 1px 0 0 rgba(255, 255, 255, 0.04) inset;
+  --shadow-glow: 0 0 0 1px rgba(90, 169, 255, 0.25),
+    0 0 32px -8px rgba(90, 169, 255, 0.45);
 }
 
 html {
-  background: var(--color-cream);
+  background: var(--color-cream-deep);
+  color-scheme: dark;
 }
 
 body {
   font-family: var(--font-body), system-ui, sans-serif;
   color: var(--color-ink);
+  background:
+    radial-gradient(1100px 520px at 50% -12%, rgba(90, 169, 255, 0.07), transparent 62%),
+    var(--color-cream);
   -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.011em;
 }
 
 h1,
@@ -58,54 +77,71 @@ h2,
 h3,
 .font-display {
   font-family: var(--font-display), system-ui, sans-serif;
+  letter-spacing: -0.03em;
 }
 
-/* Carte "Todo Math" : profondeur par ombre douce + léger dégradé, pas de contour */
+/* Chiffres alignés : indispensable dans un tableau de bord */
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* ---------- Surfaces ---------- */
+
 .card-pop {
-  background: linear-gradient(180deg, #fffdf5 0%, var(--color-card) 100%);
-  border: none;
-  border-radius: 1.75rem;
-  box-shadow:
-    0 2px 4px rgba(45, 45, 63, 0.05),
-    0 12px 28px rgba(45, 45, 63, 0.1);
+  background: linear-gradient(180deg, var(--color-card), var(--color-cream));
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-blob);
+  box-shadow: var(--shadow-pop);
 }
 
-.btn-pop {
-  border: none;
-  border-radius: 9999px;
-  box-shadow:
-    0 2px 4px rgba(45, 45, 63, 0.08),
-    0 6px 14px rgba(45, 45, 63, 0.16);
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
-}
-.btn-pop:hover {
-  transform: translateY(-1px);
-}
-.btn-pop:active {
-  transform: translateY(2px);
-  box-shadow: 0 1px 3px rgba(45, 45, 63, 0.14);
-}
-
-/* Grande carte matière : dégradé saturé + "ombre au sol" */
+/* Carte de rubrique : la bordure s'éclaire, rien ne saute */
 .hero-card {
-  border-radius: 2rem;
-  box-shadow:
-    0 3px 6px rgba(45, 45, 63, 0.1),
-    0 16px 32px rgba(45, 45, 63, 0.18);
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-blob);
+  box-shadow: var(--shadow-pop);
+  transition: border-color 0.18s ease,
+    transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .hero-card:hover {
-  transform: translateY(-3px);
-  box-shadow:
-    0 6px 10px rgba(45, 45, 63, 0.12),
-    0 22px 40px rgba(45, 45, 63, 0.22);
+  border-color: var(--color-line-strong);
+  transform: translateY(-2px);
+}
+.hero-card:active {
+  transform: translateY(0);
 }
 
-/* Apparition douce des blocs */
+/* ---------- Contrôles ---------- */
+
+.btn-pop {
+  border: 1px solid var(--color-line-strong);
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.12s ease,
+    background-color 0.12s ease, border-color 0.12s ease;
+}
+.btn-pop:hover {
+  border-color: var(--color-line-strong);
+  filter: brightness(1.12);
+}
+.btn-pop:active {
+  transform: scale(0.97);
+}
+
+/* Bouton principal : le vert « feu au vert » */
+.btn-pop.bg-ink {
+  background: var(--color-zest) !important;
+  color: #04121f !important;
+  border-color: transparent;
+  box-shadow: var(--shadow-glow);
+}
+
+/* ---------- Micro-animations ---------- */
+
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -113,117 +149,102 @@ h3,
   }
 }
 .rise {
-  animation: rise 0.35s ease both;
+  animation: rise 0.32s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
-/* Cascade : les enfants d'une grille apparaissent l'un après l'autre */
 .stagger > * {
-  animation: rise 0.4s ease both;
+  animation: rise 0.36s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 .stagger > *:nth-child(1) { animation-delay: 0.02s; }
-.stagger > *:nth-child(2) { animation-delay: 0.06s; }
-.stagger > *:nth-child(3) { animation-delay: 0.1s; }
-.stagger > *:nth-child(4) { animation-delay: 0.14s; }
-.stagger > *:nth-child(5) { animation-delay: 0.18s; }
-.stagger > *:nth-child(6) { animation-delay: 0.22s; }
-.stagger > *:nth-child(7) { animation-delay: 0.26s; }
-.stagger > *:nth-child(8) { animation-delay: 0.3s; }
-.stagger > *:nth-child(n + 9) { animation-delay: 0.34s; }
+.stagger > *:nth-child(2) { animation-delay: 0.05s; }
+.stagger > *:nth-child(3) { animation-delay: 0.08s; }
+.stagger > *:nth-child(4) { animation-delay: 0.11s; }
+.stagger > *:nth-child(5) { animation-delay: 0.14s; }
+.stagger > *:nth-child(6) { animation-delay: 0.17s; }
+.stagger > *:nth-child(n + 7) { animation-delay: 0.2s; }
 
-/* Flamme de série : petit balancement quand la série est active */
-@keyframes flicker {
-  0%, 100% { transform: rotate(-6deg) scale(1); }
-  50% { transform: rotate(6deg) scale(1.12); }
-}
-.flame-active {
-  animation: flicker 1.6s ease-in-out infinite;
-  transform-origin: 50% 85%;
-}
-
-/* Pop du compteur XP quand la valeur change */
-@keyframes pop {
-  0% { transform: scale(1); }
-  40% { transform: scale(1.35); }
-  100% { transform: scale(1); }
-}
-.pop-once {
-  animation: pop 0.35s ease;
-}
-
-/* Icône de carte matière : petit rebond au survol de la carte */
-.hero-card .card-icon {
-  transition: transform 0.15s ease;
-}
-.hero-card:hover .card-icon {
-  transform: translateY(-3px) rotate(-4deg) scale(1.06);
-}
-
-/* Halo doux sur le défi du jour tant qu'il n'est pas fait */
-@keyframes glow {
-  0%, 100% { box-shadow: 0 3px 6px rgba(45, 45, 63, 0.1), 0 16px 32px rgba(45, 45, 63, 0.18); }
-  50% { box-shadow: 0 3px 6px rgba(45, 45, 63, 0.1), 0 16px 40px rgba(245, 185, 62, 0.55); }
-}
-.daily-glow {
-  animation: glow 2.4s ease-in-out infinite;
-}
-
-/* Respecte la préférence "réduire les animations" */
-@media (prefers-reduced-motion: reduce) {
-  .stagger > *,
-  .rise,
-  .flame-active,
-  .pop-once,
-  .daily-glow,
-  .confetti,
-  .shake {
-    animation: none !important;
-  }
-}
-
-/* Confettis (réussite) */
-@keyframes confetti-fall {
-  0% {
-    transform: translateY(-10px) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(90px) rotate(320deg);
-    opacity: 0;
-  }
+/* Validation */
+@keyframes go-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(90, 169, 255, 0.5); }
+  70% { box-shadow: 0 0 0 14px rgba(90, 169, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(90, 169, 255, 0); }
 }
 .confetti {
-  animation: confetti-fall 0.9s ease-out both;
+  animation: go-pulse 0.7s ease-out both;
 }
 
-/* Impression des fiches mémo : contenu seul, fond blanc */
-@media print {
-  header,
-  nav {
-    display: none !important;
-  }
-  html,
-  body {
-    background: #fff;
-  }
-  main {
-    padding: 0 !important;
-    max-width: none !important;
-  }
-}
-
-/* Secousse (erreur) */
-@keyframes shake {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-5px);
-  }
-  75% {
-    transform: translateX(5px);
-  }
+/* Refus : secousse courte et sèche */
+@keyframes deny {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  60% { transform: translateX(5px); }
+  80% { transform: translateX(-2px); }
 }
 .shake {
-  animation: shake 0.25s ease-in-out 2;
+  animation: deny 0.32s ease-in-out;
+}
+
+/* Compteur qui s'incrémente */
+@keyframes tick {
+  0% { transform: translateY(0); }
+  40% { transform: translateY(-3px); }
+  100% { transform: translateY(0); }
+}
+.pop-once {
+  animation: tick 0.3s ease;
+}
+
+/* Série en cours */
+@keyframes flicker {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.75; transform: scale(1.08); }
+}
+.flame-active {
+  animation: flicker 1.8s ease-in-out infinite;
+}
+
+/* Séance du jour non faite */
+@keyframes standby {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(90, 169, 255, 0.18); }
+  50% { box-shadow: 0 0 24px -6px rgba(90, 169, 255, 0.5); }
+}
+.daily-glow {
+  animation: standby 2.6s ease-in-out infinite;
+}
+
+/* Balayage lumineux (barres de progression) */
+@keyframes sweep {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(220%); }
+}
+.sweep {
+  position: relative;
+  overflow: hidden;
+}
+.sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), transparent);
+  animation: sweep 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise, .stagger > *, .confetti, .shake, .pop-once, .flame-active,
+  .daily-glow, .sweep::after {
+    animation: none !important;
+  }
+  .hero-card:hover { transform: none; }
+}
+
+/* ---------- Impression ---------- */
+@media print {
+  header, nav { display: none !important; }
+  html, body { background: #fff; color: #000; }
+  main { padding: 0 !important; max-width: none !important; }
+  .card-pop, .hero-card {
+    background: #fff;
+    border-color: #ccc;
+    box-shadow: none;
+  }
 }

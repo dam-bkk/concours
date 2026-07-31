@@ -1,18 +1,18 @@
 import type { Metadata, Viewport } from "next";
-import { Baloo_2, Nunito } from "next/font/google";
+import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/nav";
 
-const baloo = Baloo_2({
+const display = Space_Grotesk({
   variable: "--font-baloo",
   subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
+  weight: ["500", "600", "700"],
 });
 
-const nunito = Nunito({
+const body = Inter({
   variable: "--font-nunito",
   subsets: ["latin"],
-  weight: ["400", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#fff9f2",
+  themeColor: "#0d0f14",
 };
 
 export default function RootLayout({
@@ -29,10 +29,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="fr">
-      <body className={`${baloo.variable} ${nunito.variable} min-h-dvh`}>
+      <body className={`${display.variable} ${body.variable} min-h-dvh`}>
         <Nav />
         {/* pb pour la tab-bar mobile */}
-        <main className="mx-auto w-full max-w-[1250px] px-4 pb-28 pt-6 md:px-8 md:pb-12">
+        <main className="mx-auto w-full max-w-[1600px] px-4 pb-28 pt-6 md:px-8 md:pb-12">
           {children}
         </main>
       </body>

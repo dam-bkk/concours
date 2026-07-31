@@ -264,7 +264,7 @@ export default function Home() {
       </div>
 
       {/* Révision espacée + mode contrôle */}
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4">
         <Link href="/revision" className="card-pop group flex items-center gap-4 p-4 transition-transform hover:-translate-y-0.5">
           <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-grandeurs-tint text-grandeurs-strong">
             <BrainCircuit size={26} strokeWidth={2.25} />
@@ -295,7 +295,7 @@ export default function Home() {
       </div>
 
       {/* Matières */}
-      <section className="stagger grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="stagger grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
         {visibleSubjects.map((s) => {
           const chapters = chaptersFor(s.id, grade);
           const total = chapters.reduce((n, c) => n + c.exercises.length, 0);
