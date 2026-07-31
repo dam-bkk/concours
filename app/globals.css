@@ -1,0 +1,229 @@
+@import "tailwindcss";
+
+@theme {
+  /* Fond & encre — palette "Todo Math" (cf. PIKKO_INSPIRATION) */
+  --color-cream: #fff9ee;
+  --color-cream-deep: #fff4dc;
+  --color-card: #fffcf0;
+  --color-ink: #2d2d3f;
+  --color-muted: #62627a;
+  --color-line: #f0e6d2;
+
+  /* Accent décoratif (grands titres / formes uniquement, pas de petit texte blanc dessus) */
+  --color-zest: #e8492f;
+  --color-zest-soft: #ffe9e0;
+
+  /* Domaines : tint = fond, strong = texte (vérifiés WCAG AA) */
+  --color-nombres-tint: #ffe3e2;
+  --color-nombres-strong: #b32b44;
+  --color-geometrie-tint: #dcedff;
+  --color-geometrie-strong: #1d5fa8;
+  --color-grandeurs-tint: #d7f4e8;
+  --color-grandeurs-strong: #0f6b52;
+  --color-donnees-tint: #e9e3ff;
+  --color-donnees-strong: #5a3ec8;
+
+  /* XP / série */
+  --color-sun: #ffd166;
+  --color-sun-tint: #fff0c2;
+  --color-sun-strong: #7a5800;
+
+  /* Feedback */
+  --color-ok-tint: #d7f4e8;
+  --color-ok-strong: #0f6b52;
+  --color-ko-tint: #ffe3e2;
+  --color-ko-strong: #b32b44;
+
+  --font-display: var(--font-baloo);
+  --font-body: var(--font-nunito);
+
+  --radius-blob: 1.75rem;
+
+  --shadow-pop: 0 6px 0 0 rgba(42, 36, 64, 0.12);
+  --shadow-pop-sm: 0 3px 0 0 rgba(42, 36, 64, 0.12);
+}
+
+html {
+  background: var(--color-cream);
+}
+
+body {
+  font-family: var(--font-body), system-ui, sans-serif;
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display), system-ui, sans-serif;
+}
+
+/* Carte "Todo Math" : profondeur par ombre douce + léger dégradé, pas de contour */
+.card-pop {
+  background: linear-gradient(180deg, #fffdf5 0%, var(--color-card) 100%);
+  border: none;
+  border-radius: 1.75rem;
+  box-shadow:
+    0 2px 4px rgba(45, 45, 63, 0.05),
+    0 12px 28px rgba(45, 45, 63, 0.1);
+}
+
+.btn-pop {
+  border: none;
+  border-radius: 9999px;
+  box-shadow:
+    0 2px 4px rgba(45, 45, 63, 0.08),
+    0 6px 14px rgba(45, 45, 63, 0.16);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.btn-pop:hover {
+  transform: translateY(-1px);
+}
+.btn-pop:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 3px rgba(45, 45, 63, 0.14);
+}
+
+/* Grande carte matière : dégradé saturé + "ombre au sol" */
+.hero-card {
+  border-radius: 2rem;
+  box-shadow:
+    0 3px 6px rgba(45, 45, 63, 0.1),
+    0 16px 32px rgba(45, 45, 63, 0.18);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.hero-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 6px 10px rgba(45, 45, 63, 0.12),
+    0 22px 40px rgba(45, 45, 63, 0.22);
+}
+
+/* Apparition douce des blocs */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise {
+  animation: rise 0.35s ease both;
+}
+
+/* Cascade : les enfants d'une grille apparaissent l'un après l'autre */
+.stagger > * {
+  animation: rise 0.4s ease both;
+}
+.stagger > *:nth-child(1) { animation-delay: 0.02s; }
+.stagger > *:nth-child(2) { animation-delay: 0.06s; }
+.stagger > *:nth-child(3) { animation-delay: 0.1s; }
+.stagger > *:nth-child(4) { animation-delay: 0.14s; }
+.stagger > *:nth-child(5) { animation-delay: 0.18s; }
+.stagger > *:nth-child(6) { animation-delay: 0.22s; }
+.stagger > *:nth-child(7) { animation-delay: 0.26s; }
+.stagger > *:nth-child(8) { animation-delay: 0.3s; }
+.stagger > *:nth-child(n + 9) { animation-delay: 0.34s; }
+
+/* Flamme de série : petit balancement quand la série est active */
+@keyframes flicker {
+  0%, 100% { transform: rotate(-6deg) scale(1); }
+  50% { transform: rotate(6deg) scale(1.12); }
+}
+.flame-active {
+  animation: flicker 1.6s ease-in-out infinite;
+  transform-origin: 50% 85%;
+}
+
+/* Pop du compteur XP quand la valeur change */
+@keyframes pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+.pop-once {
+  animation: pop 0.35s ease;
+}
+
+/* Icône de carte matière : petit rebond au survol de la carte */
+.hero-card .card-icon {
+  transition: transform 0.15s ease;
+}
+.hero-card:hover .card-icon {
+  transform: translateY(-3px) rotate(-4deg) scale(1.06);
+}
+
+/* Halo doux sur le défi du jour tant qu'il n'est pas fait */
+@keyframes glow {
+  0%, 100% { box-shadow: 0 3px 6px rgba(45, 45, 63, 0.1), 0 16px 32px rgba(45, 45, 63, 0.18); }
+  50% { box-shadow: 0 3px 6px rgba(45, 45, 63, 0.1), 0 16px 40px rgba(245, 185, 62, 0.55); }
+}
+.daily-glow {
+  animation: glow 2.4s ease-in-out infinite;
+}
+
+/* Respecte la préférence "réduire les animations" */
+@media (prefers-reduced-motion: reduce) {
+  .stagger > *,
+  .rise,
+  .flame-active,
+  .pop-once,
+  .daily-glow,
+  .confetti,
+  .shake {
+    animation: none !important;
+  }
+}
+
+/* Confettis (réussite) */
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(90px) rotate(320deg);
+    opacity: 0;
+  }
+}
+.confetti {
+  animation: confetti-fall 0.9s ease-out both;
+}
+
+/* Impression des fiches mémo : contenu seul, fond blanc */
+@media print {
+  header,
+  nav {
+    display: none !important;
+  }
+  html,
+  body {
+    background: #fff;
+  }
+  main {
+    padding: 0 !important;
+    max-width: none !important;
+  }
+}
+
+/* Secousse (erreur) */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+.shake {
+  animation: shake 0.25s ease-in-out 2;
+}
