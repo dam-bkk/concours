@@ -14,6 +14,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: "0.2.0",
+    date: "2026-08-01",
+    kind: "minor",
+    changes: [
+      "Nouvelle identité : Admisio, logo et design de plateforme professionnelle",
+      "Interface claire, bleu institutionnel, angles droits, contrastes AAA",
+      "Catalogue de concours étendu et regroupé par famille",
+    ],
+  },
+  {
     version: "0.1.0",
     date: "2026-07-31",
     kind: "minor",

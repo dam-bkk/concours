@@ -69,7 +69,7 @@ export default function ReglagesPage() {
           Réglages
         </h1>
         <span className="rounded-[3px] bg-donnees-tint px-3 py-1.5 text-sm font-extrabold text-donnees-strong">
-          Lauréat v{APP_VERSION}
+          Admisio v{APP_VERSION}
         </span>
       </div>
 

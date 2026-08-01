@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 /*
- * Lauréat / Kreneau — design system « plateforme pro ».
- * Clair, bleu, angles droits, dense. Public adulte, enjeu d'examen.
+ * Kreneau / Lauréat — design system « plateforme pro ».
+ * Clair, sobre, respirant. Cartes arrondies, élévation au survol.
+ * Public adulte, enjeu d'examen.
  * Registre volontairement opposé à Astucio (crème, arrondi, enfantin).
  * TOUS les couples texte/fond sont vérifiés AAA (≥ 7:1).
  * Les NOMS de tokens sont hérités du moteur d'origine ; seules les valeurs
@@ -49,11 +50,10 @@
   --font-display: var(--font-baloo);
   --font-body: var(--font-nunito);
 
-  /* Angles droits assumés */
-  --radius-blob: 2px;
+  --radius-blob: 16px;
 
-  --shadow-pop: 0 1px 2px rgba(15, 23, 42, 0.06);
-  --shadow-pop-sm: 0 1px 1px rgba(15, 23, 42, 0.05);
+  --shadow-pop: 0 10px 30px rgba(15, 23, 42, 0.055);
+  --shadow-pop-sm: 0 4px 14px rgba(15, 23, 42, 0.05);
   --shadow-glow: 0 1px 2px rgba(30, 64, 175, 0.3);
 }
 
@@ -92,36 +92,41 @@ h3,
   box-shadow: var(--shadow-pop);
 }
 
-/* Carte cliquable : la bordure se renforce, rien ne saute */
+/* Carte cliquable : elle décolle au survol */
 .hero-card {
   background: var(--color-card);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-blob);
   box-shadow: var(--shadow-pop);
-  transition: border-color 0.16s ease, box-shadow 0.16s ease,
-    transform 0.16s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease,
+    border-color 0.3s ease;
 }
 .hero-card:hover {
-  border-color: var(--color-zest);
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.09);
-  transform: translateY(-1px);
+  transform: translateY(-5px);
+  border-color: var(--color-line-strong);
+  box-shadow: 0 26px 60px rgba(15, 23, 42, 0.13);
 }
 .hero-card:active {
-  transform: translateY(0);
+  transform: translateY(-2px) scale(0.992);
+}
+.hero-card:focus-visible {
+  outline: 2px solid var(--color-zest);
+  outline-offset: 3px;
 }
 
 /* ---------- Contrôles ---------- */
 
 .btn-pop {
   border: 1px solid var(--color-line-strong);
-  border-radius: var(--radius-blob);
+  border-radius: 10px;
   background: var(--color-card);
   font-weight: 600;
   transition: transform 0.1s cubic-bezier(0.2, 0.8, 0.2, 1),
     background-color 0.12s ease, border-color 0.12s ease;
 }
 .btn-pop:hover {
-  border-color: var(--color-zest);
+  border-color: var(--color-line-strong);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
 }
 .btn-pop:active {
   transform: scale(0.98);

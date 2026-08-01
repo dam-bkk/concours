@@ -1,35 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs>
-    <radialGradient id="b" cx="38%" cy="30%" r="75%">
-      <stop offset="0%" stop-color="#FFC66E"/>
-      <stop offset="45%" stop-color="#FF9F2E"/>
-      <stop offset="80%" stop-color="#F07514"/>
-      <stop offset="100%" stop-color="#D95E07"/>
-    </radialGradient>
-    <radialGradient id="s" cx="70%" cy="78%" r="60%">
-      <stop offset="0%" stop-color="#B34A00" stop-opacity="0.45"/>
-      <stop offset="70%" stop-color="#B34A00" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="l" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#7ED07E"/>
-      <stop offset="100%" stop-color="#2E9E4F"/>
-    </linearGradient>
-    <radialGradient id="g" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9"/>
-      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
-    </radialGradient>
-  </defs>
-  <path d="M32 9.5 Q31.4 6.5 34 4.6" fill="none" stroke="#7A4A21" stroke-width="2.6" stroke-linecap="round"/>
-  <path d="M34.5 7.5 Q40.5 1.5 48 4.5 Q46.5 12 39.5 12.2 Q35.5 12.3 34.5 7.5 Z" fill="url(#l)"/>
-  <circle cx="32" cy="34" r="24.5" fill="url(#b)"/>
-  <circle cx="32" cy="34" r="24.5" fill="url(#s)"/>
-  <ellipse cx="23" cy="23.5" rx="8.5" ry="6" fill="url(#g)" transform="rotate(-28 23 23.5)"/>
-  <circle cx="41.5" cy="19.5" r="2.1" fill="#FFFFFF" opacity="0.55"/>
-  <circle cx="24.5" cy="35" r="2.7" fill="#2d2d3f"/>
-  <circle cx="39.5" cy="35" r="2.7" fill="#2d2d3f"/>
-  <circle cx="25.4" cy="34.1" r="0.9" fill="#FFFFFF"/>
-  <circle cx="40.4" cy="34.1" r="0.9" fill="#FFFFFF"/>
-  <path d="M24.5 42.5 Q32 49 39.5 42.5" fill="none" stroke="#2d2d3f" stroke-width="2.8" stroke-linecap="round"/>
-  <ellipse cx="19.5" cy="41.5" rx="3" ry="1.9" fill="#FF6B4A" opacity="0.5"/>
-  <ellipse cx="44.5" cy="41.5" rx="3" ry="1.9" fill="#FF6B4A" opacity="0.5"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <rect width="32" height="32" rx="8" fill="#1e40af"/>
+  <path d="M9 24 16 8l7 16" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M12.2 17.6h7.6" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>
 </svg>

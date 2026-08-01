@@ -4,6 +4,7 @@ import { useMemo, useRef, useState } from "react";
 import { Check, X, Lightbulb, ArrowRight, RotateCcw } from "lucide-react";
 import { playSuccess, playError } from "@/lib/fx";
 import { checkAnswer } from "@/lib/answers";
+import { Figure } from "@/components/figures";
 
 export interface PlayerItem {
   id: string;
@@ -14,6 +15,8 @@ export interface PlayerItem {
   accept?: string[];
   explanation: string;
   hint?: string;
+  /** Illustration de la situation (id du catalogue de figures) */
+  figure?: string;
   /** XP gagnée si bonne réponse du premier coup */
   xp: number;
   /** Petit label affiché en haut à droite (ex: "Niveau 2") */
@@ -152,6 +155,12 @@ export function Player({
             </span>
           )}
         </div>
+
+        {item.figure && (
+          <div className="mb-4">
+            <Figure id={item.figure} />
+          </div>
+        )}
 
         {/* Réponses */}
         {item.type === "qcm" && item.choices && (

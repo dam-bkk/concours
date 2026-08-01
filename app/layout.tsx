@@ -16,7 +16,7 @@ const body = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Lauréat — Concours de la fonction publique",
+  title: "Admisio — Concours de la fonction publique",
   description: "Cours, QCM et épreuves blanches pour réussir votre concours",
 };
 

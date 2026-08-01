@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Swords,
   ChevronRight,
@@ -11,15 +11,35 @@ import {
   BrainCircuit,
   TimerReset,
   Check,
+  Search,
+  X,
 } from "lucide-react";
 import { chaptersFor } from "@/lib/chapters";
 import type { Grade } from "@/lib/types";
 import { useProgress, todayKey, dueReviews } from "@/lib/progress";
 import { usePrefs, setStudentName, setGrade, setOptions } from "@/lib/prefs";
-import { SUBJECTS, GRADES, GRADE_LABELS, GRADES_READY } from "@/lib/subjects";
+import {
+  SUBJECTS,
+  GRADES,
+  GRADE_LABELS,
+  GRADES_READY,
+  FAMILY_LABELS,
+  FAMILY_TAGLINES,
+  groupByFamily,
+} from "@/lib/subjects";
 import { ChapterIcon } from "@/components/chapter-icon";
-import { LaureatLogo } from "@/components/logo";
+import { AdmisioLogo } from "@/components/logo";
 import { DAILY_SIZE } from "@/lib/daily";
+
+/** Comparaison de recherche : sans casse, sans accents, sans ponctuation parasite. */
+function normalize(s: string): string {
+  return s
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/gi, " ")
+    .trim()
+    .toLowerCase();
+}
 
 /** Création / modification du profil : prénom → classe → options */
 function ProfileSetup({ onDone }: { onDone: () => void }) {
@@ -40,7 +60,7 @@ function ProfileSetup({ onDone }: { onDone: () => void }) {
       {step === 0 && (
         <>
           <h1 className="font-display text-2xl font-extrabold md:text-3xl">
-            Bienvenue sur Lauréat
+            Bienvenue sur Admisio
           </h1>
           <p className="mt-1 font-semibold text-muted">Quel est votre prénom ?</p>
           <form
@@ -165,12 +185,27 @@ function ProfileSetup({ onDone }: { onDone: () => void }) {
 
 export default function Home() {
   const progress = useProgress();
-  const { name, grade, options, hydrated } = usePrefs();
+  const { name, grade, hydrated } = usePrefs();
   // Le setup reste affiché pendant TOUT le parcours (le prénom est enregistré dès l'étape 1)
   const [showSetup, setShowSetup] = useState(false);
   const [autoOpened, setAutoOpened] = useState(false);
+  const [query, setQuery] = useState("");
   const daily = progress.dailies[todayKey()];
   const due = dueReviews(progress).length;
+
+  // Catalogue complet : TOUS les concours restent visibles (ceux sans contenu
+  // sont grisés et badgés « bientôt »), seul le parcours peut en masquer.
+  const catalogue = useMemo(
+    () => SUBJECTS.filter((s) => !s.grades || s.grades.includes(grade)),
+    [grade]
+  );
+
+  const q = normalize(query);
+  const groups = useMemo(
+    () => groupByFamily(q ? catalogue.filter((s) => normalize(s.label).includes(q)) : catalogue),
+    [catalogue, q]
+  );
+  const matches = groups.reduce((n, g) => n + g.subjects.length, 0);
 
   if (hydrated && !name && !autoOpened) {
     setShowSetup(true);
@@ -196,19 +231,13 @@ export default function Home() {
     );
   }
 
-  const visibleSubjects = SUBJECTS.filter(
-    (s) =>
-      (!s.grades || s.grades.includes(grade)) &&
-      (!s.optional || options === null || options.includes(s.id))
-  );
-
   return (
     <div className="rise space-y-4">
       {/* Rangée haute : bienvenue + défi du jour */}
       <div className="grid gap-4 lg:grid-cols-[1.6fr_1fr]">
         <div className="card-pop flex items-center gap-4 p-5 md:p-6">
           <div className="hidden sm:block">
-            <LaureatLogo size={64} />
+            <AdmisioLogo size={64} />
           </div>
           <div className="flex-1">
             <h1 className="font-display text-2xl font-extrabold leading-tight md:text-3xl">
@@ -294,71 +323,148 @@ export default function Home() {
         </Link>
       </div>
 
-      {/* Matières */}
-      <section className="stagger grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-        {visibleSubjects.map((s) => {
-          const chapters = chaptersFor(s.id, grade);
-          const total = chapters.reduce((n, c) => n + c.exercises.length, 0);
-          const done = chapters.reduce(
-            (n, c) => n + c.exercises.filter((e) => progress.exercises[e.id]?.correct).length,
-            0
-          );
-          const available = chapters.length > 0;
-          const inner = (
-            <>
-              <div className="flex items-start justify-between">
-                <span className="card-icon flex h-11 w-11 items-center justify-center rounded-[3px] bg-white/20 text-white">
-                  <ChapterIcon name={s.icon} size={24} strokeWidth={2.25} />
-                </span>
-                {available ? (
-                  <span className="flex items-center gap-1.5">
-                    {s.optional && (
-                      <span className="rounded-[3px] bg-white/25 px-2.5 py-1.5 text-xs font-extrabold text-white">
-                        Option
-                      </span>
-                    )}
-                    <span
-                      className="rounded-[3px] px-3 py-1.5 text-xs font-extrabold text-white"
-                      style={{ background: s.deep }}
-                    >
-                      {done}/{total} réussis
-                    </span>
-                  </span>
-                ) : (
-                  <span className="rounded-[3px] bg-white/25 px-3 py-1.5 text-xs font-extrabold text-white">
-                    Bientôt !
-                  </span>
-                )}
-              </div>
-              <p className="mt-2.5 font-display text-xl font-extrabold text-white md:text-2xl">{s.label}</p>
-              <p
-                className="mt-1 w-fit rounded-[3px] px-2 py-0.5 text-xs font-bold text-white"
-                style={{ background: "rgba(0,0,0,0.22)" }}
+      {/* Catalogue des concours */}
+      <section className="space-y-4">
+        <div className="card-pop flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between md:p-5">
+          <div>
+            <h2 className="font-display text-xl font-extrabold md:text-2xl">
+              Le catalogue des concours
+            </h2>
+            <p className="mt-0.5 text-sm font-bold text-muted">
+              {catalogue.length} concours et tests couverts, des catégories C à A.
+            </p>
+          </div>
+          <div className="relative w-full sm:w-80">
+            <Search
+              size={17}
+              strokeWidth={2.5}
+              className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-muted"
+              aria-hidden
+            />
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Rechercher un concours…"
+              aria-label="Rechercher un concours"
+              className="btn-pop w-full bg-card py-2.5 pr-9 pl-9 text-sm font-bold outline-none placeholder:font-semibold placeholder:text-muted focus:border-zest"
+            />
+            {query && (
+              <button
+                onClick={() => setQuery("")}
+                aria-label="Effacer la recherche"
+                className="absolute top-1/2 right-2 -translate-y-1/2 p-1 text-muted hover:text-ink"
               >
-                {s.tagline}
-              </p>
-              {available && (
-                <div className="mt-3 h-2 overflow-hidden rounded-[3px] bg-black/25">
-                  <div
-                    className="h-full rounded-[3px] bg-white transition-all duration-500"
-                    style={{ width: `${total ? Math.max(2, (done / total) * 100) : 0}%` }}
-                  />
-                </div>
-              )}
-            </>
-          );
-          const style = { background: `linear-gradient(135deg, ${s.from} 0%, ${s.to} 100%)` };
-          const cls = "hero-card block p-5";
-          return available ? (
-            <Link key={s.id} href={`/matiere/${s.id}`} className={cls} style={style}>
-              {inner}
-            </Link>
-          ) : (
-            <div key={s.id} className={`${cls} opacity-80`} style={style}>
-              {inner}
+                <X size={16} strokeWidth={2.5} />
+              </button>
+            )}
+          </div>
+        </div>
+
+        {matches === 0 && (
+          <div className="card-pop p-6 text-center">
+            <p className="font-display text-lg font-extrabold">Aucun concours trouvé</p>
+            <p className="mt-1 text-sm font-bold text-muted">
+              Rien ne correspond à « {query.trim()} » — essayez « adjoint », « douanes », « territorial »…
+            </p>
+          </div>
+        )}
+
+        {groups.map(({ family, subjects }) => (
+          <div key={family}>
+            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5 border-b border-line pb-2">
+              <h3 className="font-display text-lg font-extrabold">{FAMILY_LABELS[family]}</h3>
+              <p className="text-xs font-bold text-muted">{FAMILY_TAGLINES[family]}</p>
+              <span className="ml-auto text-xs font-extrabold text-muted tabular">
+                {subjects.length} concours
+              </span>
             </div>
-          );
-        })}
+
+            <div className="stagger mt-3 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
+              {subjects.map((s) => {
+                const chapters = chaptersFor(s.id, grade);
+                const total = chapters.reduce((n, c) => n + c.exercises.length, 0);
+                const done = chapters.reduce(
+                  (n, c) => n + c.exercises.filter((e) => progress.exercises[e.id]?.correct).length,
+                  0
+                );
+                // `optional` = pas encore ouvert dans l'app → carte grisée, non cliquable
+                const soon = s.optional === true;
+
+                const inner = (
+                  <>
+                    <div className="flex items-start justify-between gap-2">
+                      <span
+                        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[3px]"
+                        style={
+                          soon
+                            ? { background: "var(--color-raised)", color: "var(--color-muted)" }
+                            : { background: s.tint, color: s.deep }
+                        }
+                      >
+                        <ChapterIcon name={s.icon} size={21} strokeWidth={2.25} />
+                      </span>
+                      {soon ? (
+                        <span className="btn-pop shrink-0 bg-card px-2 py-1 text-[11px] font-extrabold text-muted">
+                          bientôt
+                        </span>
+                      ) : (
+                        <span
+                          className="shrink-0 rounded-[3px] px-2 py-1 text-[11px] font-extrabold text-white tabular"
+                          style={{ background: s.deep }}
+                        >
+                          {done}/{total}
+                        </span>
+                      )}
+                    </div>
+
+                    <p
+                      className={`mt-2.5 font-display text-base leading-tight font-extrabold md:text-lg ${
+                        soon ? "text-muted" : ""
+                      }`}
+                    >
+                      {s.label}
+                    </p>
+                    <p className="mt-1 text-xs leading-snug font-bold text-muted">{s.tagline}</p>
+
+                    <div className="mt-auto pt-3">
+                      <div className="h-1.5 overflow-hidden rounded-[3px] bg-line">
+                        {!soon && (
+                          <div
+                            className="h-full transition-all duration-500"
+                            style={{
+                              width: `${total ? Math.max(3, (done / total) * 100) : 0}%`,
+                              background: `linear-gradient(90deg, ${s.from} 0%, ${s.to} 100%)`,
+                            }}
+                          />
+                        )}
+                      </div>
+                    </div>
+                  </>
+                );
+
+                return soon ? (
+                  <div
+                    key={s.id}
+                    className="hero-card hero-card--soon flex flex-col p-4"
+                    aria-label={`${s.label} — bientôt disponible`}
+                  >
+                    {inner}
+                  </div>
+                ) : (
+                  <Link
+                    key={s.id}
+                    href={`/matiere/${s.id}`}
+                    className="hero-card flex flex-col p-4"
+                    style={{ borderTopColor: s.from }}
+                  >
+                    {inner}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        ))}
       </section>
     </div>
   );

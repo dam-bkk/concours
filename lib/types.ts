@@ -1,9 +1,46 @@
+/**
+ * Catalogue des concours couverts par Admisio.
+ * Ids en kebab-case courts : ils servent d'URL (/matiere/<id>) et de clés
+ * de progression — ne jamais les renommer sans migration du localStorage.
+ */
 export type Subject =
+  // — Sécurité / Justice —
   | "gardien-paix"
+  | "officier-police"
+  | "gendarmerie"
+  | "surveillant-penitentiaire"
+  | "cpip"
+  | "greffier"
+  | "agent-douanes"
+  | "controleur-douanes"
+  | "sapeur-pompier"
+  // — Administration d'État —
   | "adjoint-admin"
+  | "secretaire-admin"
+  | "attache-ira"
+  | "agent-finances"
+  | "controleur-finances"
+  | "inspecteur-finances"
+  // — Fonction publique territoriale —
+  | "adjoint-admin-territorial"
+  | "redacteur-territorial"
+  | "attache-territorial"
   | "atsem"
+  | "agent-maitrise"
+  | "technicien-territorial"
+  // — Fonction publique hospitalière —
+  | "aide-soignant"
+  | "infirmier"
+  | "adjoint-admin-hospitalier"
+  // — Éducation —
   | "crpe"
-  | "toeic";
+  | "capes"
+  | "cpe"
+  // — Tests de recrutement (entreprises) —
+  | "tests-logique"
+  | "la-poste"
+  | "sncf"
+  | "ratp";
 
 /**
  * Famille de couleur d'un chapitre (héritée du moteur d'origine ;
@@ -53,10 +90,12 @@ export interface Exercise {
   explanation: string;
   /** Indice affichable avant de répondre */
   hint?: string;
+  /** Illustration de la situation décrite (id du catalogue de figures) */
+  figure?: string;
 }
 
 /**
- * Un seul « niveau » dans Lauréat : le champ est conservé pour la
+ * Un seul « niveau » dans Admisio : le champ est conservé pour la
  * compatibilité du moteur (registre, filtres, progression).
  */
 export type Grade = "concours";
