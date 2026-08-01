@@ -14,7 +14,7 @@ export function Figure({ id }: { id: string }) {
   const fig = FIGURES[id];
   if (!fig) return null;
   return (
-    <figure className="my-4 rounded-2xl border-2 border-line bg-card p-4">
+    <figure className="my-4 rounded-[3px] border-2 border-line bg-card p-4">
       {fig.svg}
       <figcaption className="mt-2 text-center text-sm font-bold text-muted">
         {fig.title}

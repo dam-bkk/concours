@@ -83,7 +83,7 @@ export function ChapterView({ chapter }: { chapter: Chapter }) {
       </Link>
 
       <div className="card-pop flex items-center gap-3 p-4">
-        <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${style.tint} ${style.strong}`}>
+        <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-[3px] ${style.tint} ${style.strong}`}>
           <ChapterIcon name={chapter.icon} size={24} strokeWidth={2.25} />
         </span>
         <div className="min-w-0 flex-1">
@@ -95,7 +95,7 @@ export function ChapterView({ chapter }: { chapter: Chapter }) {
             {chapter.title}
           </h1>
         </div>
-        <div className="shrink-0 rounded-xl bg-cream px-3 py-1.5 text-center">
+        <div className="shrink-0 rounded-[3px] bg-cream px-3 py-1.5 text-center">
           <p className="font-display text-lg font-extrabold leading-none">
             {doneCount}
             <span className="text-sm text-muted">/{chapter.exercises.length}</span>

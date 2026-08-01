@@ -120,14 +120,14 @@ export function ActivityCalendar({ progress }: { progress: Progress }) {
               onClick={() => !isFuture && setSelected(key)}
               disabled={isFuture}
               aria-label={`${i + 1} ${MONTHS[month]}`}
-              className={`relative aspect-square rounded-lg text-xs font-bold transition-transform ${
+              className={`relative aspect-square rounded-[3px] text-xs font-bold transition-transform ${
                 isFuture ? "opacity-30" : "hover:scale-105"
               } ${isSelected ? "ring-2 ring-ink ring-offset-2 ring-offset-card" : ""}`}
               style={{ background: CELL_COLORS[isFuture ? 0 : level] }}
             >
               <span className={level >= 3 ? "text-white" : "text-ink"}>{i + 1}</span>
               {key === today && (
-                <span className="absolute inset-x-0 -bottom-1 mx-auto h-1 w-4 rounded-full bg-ink" />
+                <span className="absolute inset-x-0 -bottom-1 mx-auto h-1 w-4 rounded-[3px] bg-ink" />
               )}
             </button>
           );
@@ -144,7 +144,7 @@ export function ActivityCalendar({ progress }: { progress: Progress }) {
       </div>
 
       {/* Détail du jour sélectionné */}
-      <div className="mt-4 rounded-2xl bg-cream px-4 py-3">
+      <div className="mt-4 rounded-[3px] bg-cream px-4 py-3">
         <p className="text-xs font-extrabold uppercase tracking-wide text-muted">{selLabel}</p>
         {sel && (sel.ex > 0 || sel.daily) ? (
           <div className="mt-1.5 flex flex-wrap gap-x-5 gap-y-1.5 font-bold">

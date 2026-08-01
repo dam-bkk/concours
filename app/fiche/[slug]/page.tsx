@@ -58,7 +58,7 @@ export default async function FichePage({
             <h2 className="font-display text-lg font-extrabold">L&apos;essentiel, point par point</h2>
             <div className="mt-2 space-y-3">
               {chapter.lesson.map((s, i) => (
-                <div key={i} className="rounded-xl border-2 border-line px-4 py-2.5 print:break-inside-avoid">
+                <div key={i} className="rounded-[3px] border-2 border-line px-4 py-2.5 print:break-inside-avoid">
                   <p className="font-extrabold">{i + 1}. {s.title}</p>
                   <p className="mt-0.5 text-[14px] font-semibold text-muted">{s.paragraphs[0]}</p>
                   {s.example && (
@@ -73,7 +73,7 @@ export default async function FichePage({
           </section>
 
           {tips.length > 0 && (
-            <section className="rounded-xl bg-sun-tint px-4 py-3 print:break-inside-avoid">
+            <section className="rounded-[3px] bg-sun-tint px-4 py-3 print:break-inside-avoid">
               <h2 className="font-display text-lg font-extrabold text-sun-strong">Les astuces à retenir</h2>
               <ul className="mt-1.5 space-y-1.5">
                 {tips.map((s, i) => (

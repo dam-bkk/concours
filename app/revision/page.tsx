@@ -51,7 +51,7 @@ export default function RevisionPage() {
           Accueil
         </Link>
         <div className="card-pop p-7 text-center md:p-9">
-          <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-grandeurs-tint text-grandeurs-strong">
+          <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-[3px] bg-grandeurs-tint text-grandeurs-strong">
             <BrainCircuit size={32} strokeWidth={2.25} />
           </span>
           <h1 className="mt-4 font-display text-3xl font-extrabold">Ma révision du jour</h1>

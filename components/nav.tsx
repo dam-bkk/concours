@@ -53,14 +53,14 @@ export function Nav() {
             <span className="font-display text-2xl font-bold tracking-tight">
               Lauréat
             </span>
-            <span className="mt-1 rounded-full bg-donnees-tint px-2 py-0.5 text-xs font-bold text-donnees-strong">
+            <span className="mt-1 rounded-[3px] bg-donnees-tint px-2 py-0.5 text-xs font-bold text-donnees-strong">
               {grade}
             </span>
           </Link>
 
           <div className="flex items-center gap-2">
             <span
-              className="flex items-center gap-1.5 rounded-full bg-sun-tint px-3 py-1.5 text-sm font-extrabold text-sun-strong"
+              className="flex items-center gap-1.5 rounded-[3px] bg-sun-tint px-3 py-1.5 text-sm font-extrabold text-sun-strong"
               title="Série de jours d'affilée"
             >
               <Flame
@@ -71,7 +71,7 @@ export function Nav() {
               {progress.streak.current}
             </span>
             <span
-              className={`flex items-center gap-1.5 rounded-full bg-donnees-tint px-3 py-1.5 text-sm font-extrabold text-donnees-strong ${
+              className={`flex items-center gap-1.5 rounded-[3px] bg-donnees-tint px-3 py-1.5 text-sm font-extrabold text-donnees-strong ${
                 xpPop ? "pop-once" : ""
               }`}
               title="Points d'expérience"
@@ -81,7 +81,7 @@ export function Nav() {
             </span>
             <button
               onClick={() => setSoundEnabled(!sound)}
-              className="rounded-full p-2 text-muted hover:bg-zest-soft hover:text-ink"
+              className="rounded-[3px] p-2 text-muted hover:bg-zest-soft hover:text-ink"
               aria-label={sound ? "Couper le son" : "Activer le son"}
               title={sound ? "Couper le son" : "Activer le son"}
             >
@@ -89,7 +89,7 @@ export function Nav() {
             </button>
             <Link
               href="/reglages"
-              className="rounded-full p-2 text-muted hover:bg-zest-soft hover:text-ink"
+              className="rounded-[3px] p-2 text-muted hover:bg-zest-soft hover:text-ink"
               aria-label="Réglages"
               title="Réglages"
             >
@@ -102,7 +102,7 @@ export function Nav() {
                 <Link
                   key={href}
                   href={href}
-                  className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold transition-colors ${
+                  className={`flex items-center gap-2 rounded-[3px] px-4 py-2 text-sm font-bold transition-colors ${
                     isActive(href)
                       ? "bg-ink text-white"
                       : "text-ink hover:bg-zest-soft"

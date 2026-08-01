@@ -51,7 +51,7 @@ export default function ProgresPage() {
           <div className="grid grid-cols-4 gap-3">
             {stats.map(({ icon: Icon, label, value, tint, strong }) => (
               <div key={label} className="card-pop flex flex-col items-center gap-1 p-3 text-center">
-                <span className={`flex h-9 w-9 items-center justify-center rounded-xl ${tint} ${strong}`}>
+                <span className={`flex h-9 w-9 items-center justify-center rounded-[3px] ${tint} ${strong}`}>
                   <Icon size={18} strokeWidth={2.5} />
                 </span>
                 <p className="font-display text-lg font-extrabold leading-none">{value}</p>
@@ -73,7 +73,7 @@ export default function ProgresPage() {
                 return (
                   <Link key={meta.id} href={`/matiere/${meta.id}`} className="group flex items-center gap-3">
                     <span
-                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-white"
+                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[3px] text-white"
                       style={{ background: `linear-gradient(135deg, ${meta.from}, ${meta.to})` }}
                     >
                       <ChapterIcon name={meta.icon} size={16} strokeWidth={2.5} />
@@ -83,9 +83,9 @@ export default function ProgresPage() {
                         <p className="truncate text-sm font-extrabold group-hover:underline">{meta.label}</p>
                         <p className="shrink-0 text-xs font-extrabold text-muted">{ok}/{total}</p>
                       </div>
-                      <div className="mt-1 h-2 overflow-hidden rounded-full bg-line">
+                      <div className="mt-1 h-2 overflow-hidden rounded-[3px] bg-line">
                         <div
-                          className="h-full rounded-full transition-all duration-500"
+                          className="h-full rounded-[3px] transition-all duration-500"
                           style={{ width: `${total ? (ok / total) * 100 : 0}%`, background: meta.to }}
                         />
                       </div>
@@ -100,7 +100,7 @@ export default function ProgresPage() {
           <div className="card-pop p-4">
             <p className="font-display text-lg font-extrabold">
               Badges
-              <span className="ml-2 align-middle rounded-full bg-sun-tint px-2 py-0.5 text-xs font-extrabold text-sun-strong">
+              <span className="ml-2 align-middle rounded-[3px] bg-sun-tint px-2 py-0.5 text-xs font-extrabold text-sun-strong">
                 {earnedBadges.length}/{BADGES.length}
               </span>
             </p>
@@ -111,7 +111,7 @@ export default function ProgresPage() {
                   <span
                     key={b.id}
                     title={`${b.label} — ${b.description}`}
-                    className={`flex h-10 w-10 items-center justify-center rounded-full ${
+                    className={`flex h-10 w-10 items-center justify-center rounded-[3px] ${
                       earned ? "bg-sun-tint text-sun-strong" : "bg-line text-muted opacity-60"
                     }`}
                   >

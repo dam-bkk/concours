@@ -42,21 +42,21 @@ export function SubjectView({ subject }: { subject: Subject }) {
         className="hero-card flex items-center gap-5 p-6 md:p-8"
         style={{ background: `linear-gradient(135deg, ${meta.from} 0%, ${meta.to} 100%)` }}
       >
-        <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/20 text-white">
+        <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[3px] bg-white/20 text-white">
           <ChapterIcon name={meta.icon} size={34} strokeWidth={2.25} />
         </span>
         <div>
           <h1 className="font-display text-3xl font-extrabold text-white md:text-4xl">
             {meta.label}
             <span
-              className="ml-3 align-middle rounded-full px-3 py-1 font-body text-sm font-extrabold text-white"
+              className="ml-3 align-middle rounded-[3px] px-3 py-1 font-body text-sm font-extrabold text-white"
               style={{ background: meta.deep }}
             >
               {grade}
             </span>
           </h1>
           <p
-            className="mt-1.5 w-fit rounded-lg px-2 py-0.5 font-bold text-white"
+            className="mt-1.5 w-fit rounded-[3px] px-2 py-0.5 font-bold text-white"
             style={{ background: "rgba(0,0,0,0.22)" }}
           >
             {meta.tagline}
@@ -84,7 +84,7 @@ export function SubjectView({ subject }: { subject: Subject }) {
                 className="card-pop group flex flex-col p-5 transition-transform hover:-translate-y-0.5"
               >
                 <div className="flex items-start justify-between">
-                  <span className={`flex h-12 w-12 items-center justify-center rounded-2xl ${style.tint} ${style.strong}`}>
+                  <span className={`flex h-12 w-12 items-center justify-center rounded-[3px] ${style.tint} ${style.strong}`}>
                     <ChapterIcon name={ch.icon} size={26} strokeWidth={2.25} />
                   </span>
                   <ProgressRing

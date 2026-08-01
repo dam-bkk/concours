@@ -84,7 +84,7 @@ export function LessonView({
             key={i}
             onClick={() => setStep(i)}
             aria-label={`Étape ${i + 1}`}
-            className="rounded-full transition-all"
+            className="rounded-[3px] transition-all"
             style={{
               width: i === step ? 26 : 10,
               height: 10,
@@ -105,7 +105,7 @@ export function LessonView({
             <ul className="mt-4 space-y-3">
               {chapter.objectives.map((o) => (
                 <li key={o} className="flex items-start gap-3 text-lg font-bold leading-snug">
-                  <span className={`mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full ${style.tint} ${style.strong}`}>
+                  <span className={`mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-[3px] ${style.tint} ${style.strong}`}>
                     <Check size={14} strokeWidth={3.5} />
                   </span>
                   {o}
@@ -143,7 +143,7 @@ export function LessonView({
             {section.figure && <span className="lg:hidden"><Figure id={section.figure} /></span>}
 
             {section.example && (
-              <div className={`mt-5 rounded-2xl ${style.tint} px-5 py-4`}>
+              <div className={`mt-5 rounded-[3px] ${style.tint} px-5 py-4`}>
                 <p className={`text-xs font-extrabold uppercase tracking-wide ${style.strong}`}>
                   Exemple
                 </p>
@@ -156,7 +156,7 @@ export function LessonView({
             )}
 
             {section.tip && (
-              <p className="mt-4 flex items-start gap-2.5 rounded-2xl bg-sun-tint px-5 py-4 font-bold leading-relaxed text-sun-strong">
+              <p className="mt-4 flex items-start gap-2.5 rounded-[3px] bg-sun-tint px-5 py-4 font-bold leading-relaxed text-sun-strong">
                 <Lightbulb size={22} className="mt-0.5 shrink-0" />
                 {section.tip}
               </p>
@@ -173,7 +173,7 @@ export function LessonView({
             <div className={`mt-4 grid gap-4 ${chapter.videos.length > 1 ? "md:grid-cols-2" : ""}`}>
               {chapter.videos.map((v) => (
                 <figure key={v.youtubeId}>
-                  <div className="overflow-hidden rounded-2xl border-2 border-line">
+                  <div className="overflow-hidden rounded-[3px] border-2 border-line">
                     <iframe
                       className="aspect-video w-full"
                       src={`https://www.youtube-nocookie.com/embed/${v.youtubeId}`}
@@ -201,7 +201,7 @@ export function LessonView({
             <Figure id={sideFigure} />
           ) : (
             <div className={`card-pop flex flex-col items-center gap-3 p-8 text-center ${style.tint}`}>
-              <span className={`flex h-24 w-24 items-center justify-center rounded-3xl bg-white/60 ${style.strong}`}>
+              <span className={`flex h-24 w-24 items-center justify-center rounded-[3px] bg-white/60 ${style.strong}`}>
                 <ChapterIcon name={chapter.icon} size={52} strokeWidth={2} />
               </span>
               <p className={`font-display text-lg font-bold ${style.strong}`}>{chapter.title}</p>

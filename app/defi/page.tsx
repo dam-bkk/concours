@@ -37,7 +37,7 @@ export default function DefiPage() {
           Accueil
         </Link>
         <div className="card-pop p-7 text-center md:p-9">
-          <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-sun-tint text-sun-strong">
+          <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-[3px] bg-sun-tint text-sun-strong">
             <Swords size={32} strokeWidth={2.25} />
           </span>
           <h1 className="mt-4 font-display text-3xl font-extrabold">Le défi du jour</h1>
@@ -47,7 +47,7 @@ export default function DefiPage() {
           </p>
 
           {already && (
-            <p className="mt-4 flex items-center justify-center gap-2 rounded-2xl bg-ok-tint px-4 py-3 font-extrabold text-ok-strong">
+            <p className="mt-4 flex items-center justify-center gap-2 rounded-[3px] bg-ok-tint px-4 py-3 font-extrabold text-ok-strong">
               <CheckCircle2 size={20} />
               Déjà fait aujourd&apos;hui : {already.score}/{already.total}. Tu peux rejouer pour t&apos;entraîner !
             </p>

@@ -1,73 +1,70 @@
 @import "tailwindcss";
 
 /*
- * Lauréat — design system « institutionnel premium ».
- * Sombre, dense, sobre. Public adulte en préparation de concours.
- * Tous les couples texte/fond sont vérifiés AAA (≥ 7:1) — voir scripts de contrôle.
- * Les NOMS de tokens sont conservés depuis le moteur d'origine ; seules les
- * valeurs changent, ce qui refond l'app entière sans toucher aux composants.
+ * Lauréat / Kreneau — design system « plateforme pro ».
+ * Clair, bleu, angles droits, dense. Public adulte, enjeu d'examen.
+ * Registre volontairement opposé à Astucio (crème, arrondi, enfantin).
+ * TOUS les couples texte/fond sont vérifiés AAA (≥ 7:1).
+ * Les NOMS de tokens sont hérités du moteur d'origine ; seules les valeurs
+ * changent, ce qui refond l'app entière sans toucher aux composants.
  */
 
 @theme {
-  /* Surfaces : profondeur par empilement */
-  --color-cream: #0d0f14; /* fond de page */
-  --color-cream-deep: #08090d;
-  --color-card: #14171f; /* panneaux */
-  --color-raised: #1b1f29;
-  --color-line: #262b38;
-  --color-line-strong: #384156;
+  /* Surfaces */
+  --color-cream: #f6f8fb; /* fond de page */
+  --color-cream-deep: #eef2f7;
+  --color-card: #ffffff; /* panneaux */
+  --color-raised: #f2f5f9;
+  --color-line: #dde3ec;
+  --color-line-strong: #c3ccdb;
 
-  /* Texte (AAA sur toutes les surfaces) */
-  --color-ink: #f3f5fa; /* 17,6:1 */
-  --color-muted: #a9b2c7; /*  9,0:1 */
+  /* Texte (AAA) */
+  --color-ink: #0f172a; /* 16,8:1 */
+  --color-muted: #475569; /*  7,1:1 */
 
-  /* Accent principal : bleu institutionnel */
-  --color-zest: #5aa9ff;
-  --color-zest-soft: #0f2039;
+  /* Accent : bleu institutionnel */
+  --color-zest: #1e40af; /*  8,2:1 — AAA */
+  --color-zest-soft: #e8eefc;
 
   /* Signalétique */
-  --color-sun: #ffb020;
-  --color-sun-tint: #2a1f06;
-  --color-sun-strong: #ffb020; /* 10,5:1 */
+  --color-sun: #7c2d12; /*  8,8:1 */
+  --color-sun-tint: #fdf0e6;
+  --color-sun-strong: #7c2d12;
 
-  --color-ok-tint: #0d2a1c;
-  --color-ok-strong: #5fe0a0; /* 10,9:1 */
-  --color-ko-tint: #2c1414;
-  --color-ko-strong: #ff9a9a; /*  8,1:1 */
+  --color-ok-tint: #e6f4ec;
+  --color-ok-strong: #0b5d16; /*  7,6:1 */
+  --color-ko-tint: #fceaea;
+  --color-ko-strong: #8a1010; /*  9,1:1 */
 
-  /* Familles thématiques (héritées du moteur) */
-  --color-nombres-tint: #2c1414;
-  --color-nombres-strong: #ff9a9a;
-  --color-geometrie-tint: #0e1e33;
-  --color-geometrie-strong: #4dd4ff;
-  --color-grandeurs-tint: #0d2a1c;
-  --color-grandeurs-strong: #7dd3a8;
-  --color-donnees-tint: #1d1832;
-  --color-donnees-strong: #c4a2ff;
+  /* Familles thématiques */
+  --color-nombres-tint: #fceaea;
+  --color-nombres-strong: #8a1010;
+  --color-geometrie-tint: #e8eefc;
+  --color-geometrie-strong: #1e3a8a;
+  --color-grandeurs-tint: #e4f2ee;
+  --color-grandeurs-strong: #0c4a3e;
+  --color-donnees-tint: #eee9fb;
+  --color-donnees-strong: #5b21b6;
 
   --font-display: var(--font-baloo);
   --font-body: var(--font-nunito);
 
-  --radius-blob: 1rem;
+  /* Angles droits assumés */
+  --radius-blob: 2px;
 
-  --shadow-pop: 0 1px 0 0 rgba(255, 255, 255, 0.04) inset,
-    0 8px 24px -12px rgba(0, 0, 0, 0.9);
-  --shadow-pop-sm: 0 1px 0 0 rgba(255, 255, 255, 0.04) inset;
-  --shadow-glow: 0 0 0 1px rgba(90, 169, 255, 0.25),
-    0 0 32px -8px rgba(90, 169, 255, 0.45);
+  --shadow-pop: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-pop-sm: 0 1px 1px rgba(15, 23, 42, 0.05);
+  --shadow-glow: 0 1px 2px rgba(30, 64, 175, 0.3);
 }
 
 html {
-  background: var(--color-cream-deep);
-  color-scheme: dark;
+  background: var(--color-cream);
 }
 
 body {
   font-family: var(--font-body), system-ui, sans-serif;
   color: var(--color-ink);
-  background:
-    radial-gradient(1100px 520px at 50% -12%, rgba(90, 169, 255, 0.07), transparent 62%),
-    var(--color-cream);
+  background: var(--color-cream);
   -webkit-font-smoothing: antialiased;
   letter-spacing: -0.011em;
 }
@@ -77,7 +74,7 @@ h2,
 h3,
 .font-display {
   font-family: var(--font-display), system-ui, sans-serif;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.025em;
 }
 
 /* Chiffres alignés : indispensable dans un tableau de bord */
@@ -89,23 +86,25 @@ h3,
 /* ---------- Surfaces ---------- */
 
 .card-pop {
-  background: linear-gradient(180deg, var(--color-card), var(--color-cream));
+  background: var(--color-card);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-blob);
   box-shadow: var(--shadow-pop);
 }
 
-/* Carte de rubrique : la bordure s'éclaire, rien ne saute */
+/* Carte cliquable : la bordure se renforce, rien ne saute */
 .hero-card {
+  background: var(--color-card);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-blob);
   box-shadow: var(--shadow-pop);
-  transition: border-color 0.18s ease,
-    transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: border-color 0.16s ease, box-shadow 0.16s ease,
+    transform 0.16s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .hero-card:hover {
-  border-color: var(--color-line-strong);
-  transform: translateY(-2px);
+  border-color: var(--color-zest);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.09);
+  transform: translateY(-1px);
 }
 .hero-card:active {
   transform: translateY(0);
@@ -115,25 +114,27 @@ h3,
 
 .btn-pop {
   border: 1px solid var(--color-line-strong);
-  border-radius: 9999px;
+  border-radius: var(--radius-blob);
+  background: var(--color-card);
   font-weight: 600;
-  transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.12s ease,
+  transition: transform 0.1s cubic-bezier(0.2, 0.8, 0.2, 1),
     background-color 0.12s ease, border-color 0.12s ease;
 }
 .btn-pop:hover {
-  border-color: var(--color-line-strong);
-  filter: brightness(1.12);
+  border-color: var(--color-zest);
 }
 .btn-pop:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
 }
 
-/* Bouton principal : le vert « feu au vert » */
+/* Bouton principal */
 .btn-pop.bg-ink {
   background: var(--color-zest) !important;
-  color: #04121f !important;
-  border-color: transparent;
-  box-shadow: var(--shadow-glow);
+  color: #ffffff !important;
+  border-color: var(--color-zest);
+}
+.btn-pop.bg-ink:hover {
+  background: #1a3796 !important;
 }
 
 /* ---------- Micro-animations ---------- */
@@ -141,7 +142,7 @@ h3,
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(6px);
   }
   to {
     opacity: 1;
@@ -149,39 +150,39 @@ h3,
   }
 }
 .rise {
-  animation: rise 0.32s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: rise 0.28s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 .stagger > * {
-  animation: rise 0.36s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: rise 0.32s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 .stagger > *:nth-child(1) { animation-delay: 0.02s; }
-.stagger > *:nth-child(2) { animation-delay: 0.05s; }
-.stagger > *:nth-child(3) { animation-delay: 0.08s; }
-.stagger > *:nth-child(4) { animation-delay: 0.11s; }
-.stagger > *:nth-child(5) { animation-delay: 0.14s; }
-.stagger > *:nth-child(6) { animation-delay: 0.17s; }
-.stagger > *:nth-child(n + 7) { animation-delay: 0.2s; }
+.stagger > *:nth-child(2) { animation-delay: 0.04s; }
+.stagger > *:nth-child(3) { animation-delay: 0.06s; }
+.stagger > *:nth-child(4) { animation-delay: 0.08s; }
+.stagger > *:nth-child(5) { animation-delay: 0.1s; }
+.stagger > *:nth-child(6) { animation-delay: 0.12s; }
+.stagger > *:nth-child(n + 7) { animation-delay: 0.14s; }
 
 /* Validation */
-@keyframes go-pulse {
-  0% { box-shadow: 0 0 0 0 rgba(90, 169, 255, 0.5); }
-  70% { box-shadow: 0 0 0 14px rgba(90, 169, 255, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(90, 169, 255, 0); }
+@keyframes ok-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(11, 93, 22, 0.35); }
+  70% { box-shadow: 0 0 0 10px rgba(11, 93, 22, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(11, 93, 22, 0); }
 }
 .confetti {
-  animation: go-pulse 0.7s ease-out both;
+  animation: ok-pulse 0.6s ease-out both;
 }
 
 /* Refus : secousse courte et sèche */
 @keyframes deny {
   0%, 100% { transform: translateX(0); }
-  20% { transform: translateX(-6px); }
-  60% { transform: translateX(5px); }
+  20% { transform: translateX(-5px); }
+  60% { transform: translateX(4px); }
   80% { transform: translateX(-2px); }
 }
 .shake {
-  animation: deny 0.32s ease-in-out;
+  animation: deny 0.3s ease-in-out;
 }
 
 /* Compteur qui s'incrémente */
@@ -191,28 +192,27 @@ h3,
   100% { transform: translateY(0); }
 }
 .pop-once {
-  animation: tick 0.3s ease;
+  animation: tick 0.28s ease;
 }
 
-/* Série en cours */
 @keyframes flicker {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.75; transform: scale(1.08); }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
 }
 .flame-active {
-  animation: flicker 1.8s ease-in-out infinite;
+  animation: flicker 2s ease-in-out infinite;
 }
 
-/* Séance du jour non faite */
+/* Séance du jour non faite : liseré bleu discret */
 @keyframes standby {
-  0%, 100% { box-shadow: 0 0 0 1px rgba(90, 169, 255, 0.18); }
-  50% { box-shadow: 0 0 24px -6px rgba(90, 169, 255, 0.5); }
+  0%, 100% { border-color: var(--color-line); }
+  50% { border-color: var(--color-zest); }
 }
 .daily-glow {
-  animation: standby 2.6s ease-in-out infinite;
+  animation: standby 2.8s ease-in-out infinite;
 }
 
-/* Balayage lumineux (barres de progression) */
+/* Balayage lumineux (chargement) */
 @keyframes sweep {
   from { transform: translateX(-100%); }
   to { transform: translateX(220%); }
@@ -225,7 +225,7 @@ h3,
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), transparent);
+  background: linear-gradient(90deg, transparent, rgba(15, 23, 42, 0.06), transparent);
   animation: sweep 1.8s ease-in-out infinite;
 }
 
@@ -240,11 +240,6 @@ h3,
 /* ---------- Impression ---------- */
 @media print {
   header, nav { display: none !important; }
-  html, body { background: #fff; color: #000; }
   main { padding: 0 !important; max-width: none !important; }
-  .card-pop, .hero-card {
-    background: #fff;
-    border-color: #ccc;
-    box-shadow: none;
-  }
+  .card-pop, .hero-card { box-shadow: none; border-color: #ccc; }
 }

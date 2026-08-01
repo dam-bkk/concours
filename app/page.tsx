@@ -86,7 +86,7 @@ function ProfileSetup({ onDone }: { onDone: () => void }) {
                 >
                   {GRADE_LABELS[g]}
                   {!ready && (
-                    <span className="absolute -top-2 -right-2 rounded-full bg-sun px-1.5 py-0.5 text-[9px] font-extrabold text-ink">
+                    <span className="absolute -top-2 -right-2 rounded-[3px] bg-sun px-1.5 py-0.5 text-[9px] font-extrabold text-ink">
                       bientôt
                     </span>
                   )}
@@ -134,7 +134,7 @@ function ProfileSetup({ onDone }: { onDone: () => void }) {
                   style={on ? { background: `linear-gradient(135deg, ${s.from}, ${s.to})` } : undefined}
                 >
                   <span
-                    className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full ${
+                    className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-[3px] ${
                       on ? "bg-white/25" : "bg-line"
                     }`}
                   >
@@ -225,7 +225,7 @@ export default function Home() {
               Prêt pour votre entraînement du jour ? Choisissez une épreuve.
             </p>
           </div>
-          <div className="hidden shrink-0 items-center gap-2 rounded-2xl bg-sun-tint px-4 py-3 md:flex">
+          <div className="hidden shrink-0 items-center gap-2 rounded-[3px] bg-sun-tint px-4 py-3 md:flex">
             <Flame size={22} strokeWidth={2.5} className="text-sun-strong" />
             <div>
               <p className="font-display text-xl font-extrabold leading-none text-sun-strong">
@@ -243,7 +243,7 @@ export default function Home() {
           }`}
         >
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-sun-strong text-white">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[3px] bg-sun-strong text-white">
               <Swords size={24} strokeWidth={2.5} />
             </span>
             <div>
@@ -266,7 +266,7 @@ export default function Home() {
       {/* Révision espacée + mode contrôle */}
       <div className="grid grid-cols-2 gap-3 sm:gap-4">
         <Link href="/revision" className="card-pop group flex items-center gap-4 p-4 transition-transform hover:-translate-y-0.5">
-          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-grandeurs-tint text-grandeurs-strong">
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[3px] bg-grandeurs-tint text-grandeurs-strong">
             <BrainCircuit size={26} strokeWidth={2.25} />
           </span>
           <div className="flex-1">
@@ -278,13 +278,13 @@ export default function Home() {
             </p>
           </div>
           {due > 0 && (
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-ko-tint font-display text-sm font-extrabold text-ko-strong">
+            <span className="flex h-8 w-8 items-center justify-center rounded-[3px] bg-ko-tint font-display text-sm font-extrabold text-ko-strong">
               {due}
             </span>
           )}
         </Link>
         <Link href="/controle" className="card-pop group flex items-center gap-4 p-4 transition-transform hover:-translate-y-0.5">
-          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-nombres-tint text-nombres-strong">
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[3px] bg-nombres-tint text-nombres-strong">
             <TimerReset size={26} strokeWidth={2.25} />
           </span>
           <div>
@@ -307,40 +307,40 @@ export default function Home() {
           const inner = (
             <>
               <div className="flex items-start justify-between">
-                <span className="card-icon flex h-11 w-11 items-center justify-center rounded-xl bg-white/20 text-white">
+                <span className="card-icon flex h-11 w-11 items-center justify-center rounded-[3px] bg-white/20 text-white">
                   <ChapterIcon name={s.icon} size={24} strokeWidth={2.25} />
                 </span>
                 {available ? (
                   <span className="flex items-center gap-1.5">
                     {s.optional && (
-                      <span className="rounded-full bg-white/25 px-2.5 py-1.5 text-xs font-extrabold text-white">
+                      <span className="rounded-[3px] bg-white/25 px-2.5 py-1.5 text-xs font-extrabold text-white">
                         Option
                       </span>
                     )}
                     <span
-                      className="rounded-full px-3 py-1.5 text-xs font-extrabold text-white"
+                      className="rounded-[3px] px-3 py-1.5 text-xs font-extrabold text-white"
                       style={{ background: s.deep }}
                     >
                       {done}/{total} réussis
                     </span>
                   </span>
                 ) : (
-                  <span className="rounded-full bg-white/25 px-3 py-1.5 text-xs font-extrabold text-white">
+                  <span className="rounded-[3px] bg-white/25 px-3 py-1.5 text-xs font-extrabold text-white">
                     Bientôt !
                   </span>
                 )}
               </div>
               <p className="mt-2.5 font-display text-xl font-extrabold text-white md:text-2xl">{s.label}</p>
               <p
-                className="mt-1 w-fit rounded-lg px-2 py-0.5 text-xs font-bold text-white"
+                className="mt-1 w-fit rounded-[3px] px-2 py-0.5 text-xs font-bold text-white"
                 style={{ background: "rgba(0,0,0,0.22)" }}
               >
                 {s.tagline}
               </p>
               {available && (
-                <div className="mt-3 h-2 overflow-hidden rounded-full bg-black/25">
+                <div className="mt-3 h-2 overflow-hidden rounded-[3px] bg-black/25">
                   <div
-                    className="h-full rounded-full bg-white transition-all duration-500"
+                    className="h-full rounded-[3px] bg-white transition-all duration-500"
                     style={{ width: `${total ? Math.max(2, (done / total) * 100) : 0}%` }}
                   />
                 </div>
