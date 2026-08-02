@@ -68,7 +68,7 @@ export default function ReglagesPage() {
           <Settings size={26} strokeWidth={2.5} className="text-muted" />
           Réglages
         </h1>
-        <span className="rounded-[3px] bg-donnees-tint px-3 py-1.5 text-sm font-extrabold text-donnees-strong">
+        <span className="rounded-xl bg-donnees-tint px-3 py-1.5 text-sm font-extrabold text-donnees-strong">
           Admisio v{APP_VERSION}
         </span>
       </div>
@@ -154,7 +154,7 @@ export default function ReglagesPage() {
                       <td className="py-2 pr-3 font-bold">{e.who}</td>
                       <td className="py-2 pr-3">{e.what}</td>
                       <td className="py-2 pr-3">
-                        <span className={`rounded-[3px] px-2.5 py-0.5 text-xs font-extrabold ${CATEGORY_STYLE[e.category]}`}>
+                        <span className={`rounded-xl px-2.5 py-0.5 text-xs font-extrabold ${CATEGORY_STYLE[e.category]}`}>
                           {e.category}
                         </span>
                       </td>
@@ -174,7 +174,7 @@ export default function ReglagesPage() {
             <div key={entry.version} className="card-pop p-4">
               <div className="flex items-center gap-2.5">
                 <p className="font-display text-xl font-extrabold">v{entry.version}</p>
-                <span className={`rounded-[3px] px-2.5 py-0.5 text-xs font-extrabold ${KIND_STYLE[entry.kind]}`}>
+                <span className={`rounded-xl px-2.5 py-0.5 text-xs font-extrabold ${KIND_STYLE[entry.kind]}`}>
                   {entry.kind}
                 </span>
                 <p className="ml-auto text-sm font-bold text-muted">

@@ -106,7 +106,7 @@ export default function ControlePage() {
           Accueil
         </Link>
         <div className="card-pop p-7 text-center">
-          <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-[3px] bg-nombres-tint text-nombres-strong">
+          <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-xl bg-nombres-tint text-nombres-strong">
             <TimerReset size={32} strokeWidth={2.25} />
           </span>
           <h1 className="mt-4 font-display text-3xl font-extrabold">Épreuve blanche</h1>
@@ -171,7 +171,7 @@ export default function ControlePage() {
                   <X size={18} strokeWidth={3} className="mt-0.5 shrink-0 text-ko-strong" />
                   {item.question}
                 </p>
-                <p className="mt-2 rounded-[3px] bg-cream px-3 py-2 text-[15px] font-semibold leading-relaxed">
+                <p className="mt-2 rounded-xl bg-cream px-3 py-2 text-[15px] font-semibold leading-relaxed">
                   {item.explanation}
                 </p>
               </div>
@@ -204,7 +204,7 @@ export default function ControlePage() {
           Contrôle {subject === "tout" ? "toutes matières" : getSubjectMeta(subject as Subject).label}
         </h1>
         <span
-          className={`rounded-[3px] px-4 py-1.5 font-display text-lg font-extrabold ${
+          className={`rounded-xl px-4 py-1.5 font-display text-lg font-extrabold ${
             left <= 60 ? "bg-ko-tint text-ko-strong" : "bg-card text-ink"
           }`}
         >

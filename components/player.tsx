@@ -35,7 +35,7 @@ function Confetti() {
       {Array.from({ length: 14 }).map((_, i) => (
         <span
           key={i}
-          className="confetti absolute h-2.5 w-2.5 rounded-[3px]"
+          className="confetti absolute h-2.5 w-2.5 rounded-xl"
           style={{
             left: `${8 + i * 6.5}%`,
             background: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
@@ -133,9 +133,9 @@ export function Player({
     <div>
       {/* barre de progression */}
       <div className="mb-4 flex items-center gap-3">
-        <div className="h-3 flex-1 overflow-hidden rounded-[3px] border-2 border-ink bg-card">
+        <div className="h-3 flex-1 overflow-hidden rounded-xl border-2 border-ink bg-card">
           <div
-            className="h-full rounded-[3px] bg-sun transition-all duration-300"
+            className="h-full rounded-xl bg-sun transition-all duration-300"
             style={{ width: `${Math.max(4, progress * 100)}%` }}
           />
         </div>
@@ -150,7 +150,7 @@ export function Player({
         <div className="mb-3 flex items-start justify-between gap-3">
           <p className="text-lg font-bold leading-snug md:text-xl">{item.question}</p>
           {item.tag && (
-            <span className="shrink-0 rounded-[3px] bg-donnees-tint px-2.5 py-1 text-xs font-extrabold text-donnees-strong">
+            <span className="shrink-0 rounded-xl bg-donnees-tint px-2.5 py-1 text-xs font-extrabold text-donnees-strong">
               {item.tag}
             </span>
           )}
@@ -248,7 +248,7 @@ export function Player({
         {!answered && !exam && item.hint && (
           <div className="mt-4">
             {showHint ? (
-              <p className="flex items-start gap-2 rounded-[3px] bg-sun-tint px-4 py-3 text-sm font-bold text-sun-strong rise">
+              <p className="flex items-start gap-2 rounded-xl bg-sun-tint px-4 py-3 text-sm font-bold text-sun-strong rise">
                 <Lightbulb size={18} className="mt-0.5 shrink-0" />
                 {item.hint}
               </p>
@@ -287,7 +287,7 @@ export function Player({
                 La bonne réponse était : <span className="text-ok-strong">{String(item.answer)}</span>
               </p>
             )}
-            <div className="mt-3 rounded-[3px] border-2 border-line bg-cream px-4 py-3">
+            <div className="mt-3 rounded-xl border-2 border-line bg-cream px-4 py-3">
               <p className="text-xs font-extrabold uppercase tracking-wide text-muted">Le corrigé</p>
               <p className="mt-1 text-[15px] font-semibold leading-relaxed">{item.explanation}</p>
             </div>
